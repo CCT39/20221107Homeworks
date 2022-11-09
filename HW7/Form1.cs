@@ -26,13 +26,17 @@ namespace HW6
             int satIndex = 52;
             int sunIndex = 52;
 
-            // 平年若一年是週六開始，則週六會多一天；閏年則週六週日各多一天。同理平年週日開始週日多一天
+            // 平年若一年是週六開始，則週六會多一天；閏年則週六週日各多一天
+            // 若該年是閏年且第一天是週五，則週六會多一天
+            // 同理平年週日開始週日多一天
             if (date.DayOfWeek == DayOfWeek.Saturday)
             {
                 satIndex++;
                 if (DateTime.IsLeapYear(date.Year))
                     sunIndex++;
             }
+            else if (date.DayOfWeek == DayOfWeek.Friday && DateTime.IsLeapYear(date.Year))
+                satIndex++;
             else if (date.DayOfWeek == DayOfWeek.Sunday)
                 sunIndex++;
 
